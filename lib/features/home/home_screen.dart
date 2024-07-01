@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:winfox/features/home/cubit/home_screen_cubit.dart';
 import 'package:winfox/features/home/widgets/grid_screen.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -13,26 +15,30 @@ class _HomeScreenState extends State<HomeScreen> {
   final List<Widget> _screens = const [GridScreen(), Placeholder()];
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text(
-          'Анекдоты',
-        ),
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.list),
+    return BlocProvider(
+      create: (context) => HomeScreenCubit()..loadJokes(),
+      child: Scaffold(
+        appBar: AppBar(
+          title: const Text(
+            'Анекдоты',
           ),
-          BottomNavigationBarItem(icon: Icon(Icons.person))
-        ],
-        onTap: (value) {
-          setState(() {
-            _selectedScreen = value;
-          });
-        },
+        ),
+        bottomNavigationBar: BottomNavigationBar(
+          items: const [
+            BottomNavigationBarItem(
+              icon: Icon(Icons.list),
+              label: 'Список',
+            ),
+            BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Что-то еще'),
+          ],
+          onTap: (value) {
+            setState(() {
+              _selectedScreen = value;
+            });
+          },
+        ),
+        body: _screens[_selectedScreen],
       ),
-      body: _screens[_selectedScreen],
     );
   }
 }

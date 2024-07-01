@@ -12,7 +12,7 @@ abstract class AppState {
     } else if (error is DioException) {
       return AppStateError('Ошибка сети');
     } else if (error is TypeError) {
-      return AppStateError('Неизвестная ошибка');
+      return AppStateError(error.toString());
     }
     return AppStateError(error.toString(), details: details);
   }

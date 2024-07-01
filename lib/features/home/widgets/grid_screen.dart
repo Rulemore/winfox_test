@@ -18,58 +18,24 @@ class GridScreen extends StatefulWidget {
 class _GridScreenState extends State<GridScreen> {
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<HomeScreenCubit, AppState>(
-      listener: (context, state) {},
-      builder: (context, state) {
-        if (state is AppStateLoading) {
-          return const Center(child: CircularProgressIndicator());
-        } else if (state is AppStateError) {
-          return Center(child: Text(state.message));
-        } else if (state is AppStateSuccess<List<JokeModel>>) {
-          return Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const Flexible(flex: 1, child: SizedBox.shrink()),
-              Flexible(
-                flex: 6,
-                child: ScrollConfiguration(
-                  behavior: ScrollConfiguration.of(context).copyWith(scrollbars: false),
+    return RefreshIndicator(
+      onRefresh: context.read<HomeScreenCubit>().loadJokes,
+      child: BlocConsumer<HomeScreenCubit, AppState>(
+        listener: (context, state) {},
+        builder: (context, state) {
+          if (state is AppStateLoading) {
+            return const Center(child: CircularProgressIndicator());
+          } else if (state is AppStateError) {
+            return Center(child: Text(state.message));
+          } else if (state is AppStateSuccess<List<JokeModel>>) {
+            return Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Flexible(flex: 1, child: SizedBox.shrink()),
+                Flexible(
+                  flex: 6,
                   child: CustomScrollView(
                     slivers: [
-                      const SliverPadding(
-                        padding: EdgeInsets.only(top: 60, bottom: 40),
-                        sliver: SliverToBoxAdapter(
-                          child: Column(
-                            children: [
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  Padding(
-                                    padding: EdgeInsets.only(right: 8, bottom: 4),
-                                    child: Text(
-                                      'Все анекдоты',
-                                      style: TextStyle(
-                                        fontWeight: FontWeight.w700,
-                                        fontSize: 28,
-                                        color: Colors.black,
-                                      ),
-                                    ),
-                                  ),
-                                  Expanded(
-                                    child: Divider(
-                                      color: Colors.black,
-                                      thickness: 2,
-                                      height: 2,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              SizedBox(height: 36),
-                            ],
-                          ),
-                        ),
-                      ),
                       SliverPadding(
                         padding: const EdgeInsets.symmetric(horizontal: 16.0),
                         sliver: SliverMasonryGrid.count(
@@ -87,13 +53,13 @@ class _GridScreenState extends State<GridScreen> {
                     ],
                   ),
                 ),
-              ),
-            ],
-          );
-        } else {
-          return const Center(child: Text('Неизвестная ошибка'));
-        }
-      },
+              ],
+            );
+          } else {
+            return const Center(child: Text('Ошибка'));
+          }
+        },
+      ),
     );
   }
 }

@@ -4,9 +4,7 @@ import 'package:winfox/core/di/di.dart';
 import 'package:winfox/domain/jokes/repository/jokes_repository.dart';
 
 class HomeScreenCubit extends Cubit<AppState> {
-  HomeScreenCubit() : super(AppStateDefault()) {
-    loadJokes();
-  }
+  HomeScreenCubit() : super(AppStateDefault());
   final _repository = getIt<JokesRepository>();
 
   Future<void> loadJokes() async {

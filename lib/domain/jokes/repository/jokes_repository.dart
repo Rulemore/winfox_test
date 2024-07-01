@@ -8,13 +8,13 @@ class JokesRepository {
   JokesRepository(this.networkService);
 
   Future<List<JokeModel>> getJokes() async {
-    final response = await networkService.get<List<Object>?>('/joke');
-    final jokes = (response.data as List<dynamic>).map((e) => JokeModel.fromJson(e as Map<String, Object>)).toList();
+    final response = await networkService.get('/joke');
+    final jokes = (response.data as List<dynamic>).map((e) => JokeModel.fromJson(e as Map<String, dynamic>)).toList();
     return jokes;
   }
 
   Future<JokeModel> getJokeById(int id) async {
     final response = await networkService.get<Object?>('/joke/$id');
-    return JokeModel.fromJson(response.data as Map<String, Object>);
+    return JokeModel.fromJson(response.data as Map<String, dynamic>);
   }
 }
