@@ -1,9 +1,15 @@
 library helpers;
 
 import 'package:dio/dio.dart' show DioException;
+import 'package:winfox/core/logger/logger.dart';
 
 abstract class AppState {
   static AppStateError catchErrorHandler(Object? error, {String? details}) {
+    logger.error(
+      message: 'catchErrorHandler',
+      error: error,
+      stackTrace: StackTrace.current,
+    );
     if (error == null) {
       return AppStateError('unidentified error', details: details);
     }
