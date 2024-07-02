@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:winfox/features/home/cubit/home_screen_cubit.dart';
-import 'package:winfox/features/home/widgets/grid_screen.dart';
+import 'package:winfox/features/home/widgets/grid_screen/grid_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});

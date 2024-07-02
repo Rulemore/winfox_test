@@ -4,7 +4,7 @@ import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:winfox/core/app_state.dart';
 import 'package:winfox/domain/jokes/models/joke_model.dart';
 import 'package:winfox/features/home/cubit/home_screen_cubit.dart';
-import 'package:winfox/features/home/widgets/joke_card.dart';
+import 'package:winfox/features/home/widgets/grid_screen/widgets/simple_joke_card.dart';
 
 class GridScreen extends StatefulWidget {
   const GridScreen({
