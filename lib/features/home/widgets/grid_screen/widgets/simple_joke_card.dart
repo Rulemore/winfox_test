@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:winfox/domain/jokes/models/joke_model.dart';
+import 'package:winfox/features/app/cubit/theme_cubit.dart';
 import 'package:winfox/features/joke_screen/joke_screen.dart';
 
 class SimpleJokeCard extends StatelessWidget {
@@ -30,6 +32,7 @@ class SimpleJokeCard extends StatelessWidget {
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(25),
             border: Border.all(
+              color: context.read<ThemeCubit>().isDarkTheme ? Colors.grey : Colors.black,
               width: 2,
               style: BorderStyle.solid,
             ),

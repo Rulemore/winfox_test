@@ -13,6 +13,7 @@ class App extends StatelessWidget {
     return BlocProvider(
       create: (context) => ThemeCubit(),
       child: BlocBuilder<ThemeCubit, AppState>(
+        buildWhen: (previous, current) => previous != current,
         builder: (context, state) {
           return MaterialApp(
             title: 'Winfox test',

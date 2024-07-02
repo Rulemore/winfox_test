@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:winfox/domain/jokes/models/joke_model.dart';
+import 'package:winfox/features/app/cubit/theme_cubit.dart';
 
 class JokeCard extends StatelessWidget {
   final JokeModel jokeModel;
@@ -17,6 +19,7 @@ class JokeCard extends StatelessWidget {
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(25),
             border: Border.all(
+              color: context.read<ThemeCubit>().isDarkTheme ? Colors.grey : Colors.black,
               width: 2,
               style: BorderStyle.solid,
             ),
@@ -32,9 +35,10 @@ class JokeCard extends StatelessWidget {
                   children: [
                     Container(
                       decoration: BoxDecoration(
-                        color: Colors.black,
+                        color: context.read<ThemeCubit>().isDarkTheme ? Colors.grey : Colors.black,
                         borderRadius: BorderRadius.circular(25),
                         border: Border.all(
+                          color: context.read<ThemeCubit>().isDarkTheme ? Colors.grey : Colors.black,
                           width: 2,
                           style: BorderStyle.solid,
                         ),
@@ -43,7 +47,10 @@ class JokeCard extends StatelessWidget {
                         padding: const EdgeInsets.symmetric(vertical: 2.0, horizontal: 4.0),
                         child: Text(
                           jokeModel.rating.toStringAsFixed(2),
-                          style: const TextStyle(color: Colors.white, fontSize: 15, fontWeight: FontWeight.bold),
+                          style: TextStyle(
+                              color: !context.read<ThemeCubit>().isDarkTheme ? Colors.white : Colors.black,
+                              fontSize: 15,
+                              fontWeight: FontWeight.bold),
                         ),
                       ),
                     ),
