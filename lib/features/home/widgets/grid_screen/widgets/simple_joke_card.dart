@@ -13,6 +13,9 @@ class SimpleJokeCard extends StatelessWidget {
       elevation: 2,
       borderRadius: BorderRadius.circular(25),
       child: InkWell(
+        customBorder: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(25),
+        ),
         onTap: () {
           Navigator.push(
             context,
