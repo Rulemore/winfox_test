@@ -16,21 +16,28 @@ class GridScreen extends StatefulWidget {
 class _GridScreenState extends State<GridScreen> {
   @override
   Widget build(BuildContext context) {
-    return RefreshIndicator(
-      onRefresh: context.read<HomeScreenCubit>().loadJokes,
-      child: BlocConsumer<HomeScreenCubit, AppState>(
-        listener: (context, state) {},
-        builder: (context, state) {
-          if (state is AppStateLoading) {
-            return _buildLoadingState();
-          } else if (state is AppStateError) {
-            return _buildErrorState(state.message);
-          } else if (state is AppStateSuccess<List<JokeModel>>) {
-            return _buildSuccessState(context, state);
-          } else {
-            return _buildErrorState('Unknown state');
-          }
-        },
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text(
+          'Анекдоты',
+        ),
+      ),
+      body: RefreshIndicator(
+        onRefresh: context.read<HomeScreenCubit>().loadJokes,
+        child: BlocConsumer<HomeScreenCubit, AppState>(
+          listener: (context, state) {},
+          builder: (context, state) {
+            if (state is AppStateLoading) {
+              return _buildLoadingState();
+            } else if (state is AppStateError) {
+              return _buildErrorState(state.message);
+            } else if (state is AppStateSuccess<List<JokeModel>>) {
+              return _buildSuccessState(context, state);
+            } else {
+              return _buildErrorState('Unknown state');
+            }
+          },
+        ),
       ),
     );
   }

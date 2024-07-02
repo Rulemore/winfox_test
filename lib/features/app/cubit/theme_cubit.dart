@@ -6,11 +6,13 @@ import 'package:winfox/core/theme/light_theme.dart';
 class ThemeCubit extends Cubit<AppState> {
   ThemeCubit() : super(AppStateSuccess(getLightTheme()));
 
+  bool get isDarkTheme => (state as AppStateSuccess).data == getDarkTheme();
+
   void changeTheme(bool value) {
     if (value) {
-      emit(AppStateSuccess(getLightTheme()));
-    } else {
       emit(AppStateSuccess(getDarkTheme()));
+    } else {
+      emit(AppStateSuccess(getLightTheme()));
     }
   }
 }
