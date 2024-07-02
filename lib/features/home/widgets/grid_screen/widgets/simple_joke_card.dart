@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:winfox/domain/jokes/models/joke_model.dart';
+import 'package:winfox/features/joke_screen/joke_screen.dart';
 
 class SimpleJokeCard extends StatelessWidget {
   final JokeModel jokeModel;
@@ -11,23 +12,32 @@ class SimpleJokeCard extends StatelessWidget {
     return Material(
       elevation: 2,
       borderRadius: BorderRadius.circular(25),
-      child: Container(
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(25),
-          border: Border.all(
-            width: 2,
-            style: BorderStyle.solid,
+      child: InkWell(
+        onTap: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => JokeScreen(
+                jokeModel: jokeModel,
+              ),
+            ),
+          );
+        },
+        child: Container(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(25),
+            border: Border.all(
+              width: 2,
+              style: BorderStyle.solid,
+            ),
           ),
-        ),
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              GestureDetector(
-                onTap: () {},
-                child: Padding(
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
                   padding: const EdgeInsets.symmetric(
                     horizontal: 16,
                     vertical: 8,
@@ -36,8 +46,8 @@ class SimpleJokeCard extends StatelessWidget {
                     jokeModel.text,
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
