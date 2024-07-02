@@ -16,8 +16,10 @@ class JokeScreen extends StatelessWidget {
         const Flexible(flex: 1, child: SizedBox.shrink()),
         Flexible(
             flex: 6,
-            child: JokeCard(
-              jokeModel: jokeModel,
+            child: SingleChildScrollView(
+              child: JokeCard(
+                jokeModel: jokeModel,
+              ),
             ))
       ]),
     );
